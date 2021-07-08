@@ -1,0 +1,194 @@
+openapi: 3.0.2
+info:
+  title: Customer Phone Details API
+  version: v1.0
+  contact:
+    email: vlad.naval@gmail.com
+  
+paths:
+  '/demo/customers/accounts/phoneNumbers':
+    get:
+      summary: List all customers' phone numbers
+      operationId: getCustomersPhoneNumbers
+      description: This service is used for retrieval of all customers' phone number
+      responses:
+        '200':
+          description: Successful Retrieval of customers phone numbers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getPhoneNumberListResponse'
+        '400':
+          $ref: '#/components/responses/badRequest'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '404':
+          $ref: '#/components/responses/resourceNotAvailable'
+        '500':
+          $ref: '#/components/responses/internalServerError'
+        '503':
+          $ref: '#/components/responses/serviceUnavailable'
+        '504':
+          $ref: '#/components/responses/gatewayTimeout'
+          
+  '/demo/customers/{customerId}/phoneNumbers':
+    get:
+      summary: Retrieve a customer's phone number
+      operationId: getCustomerPhoneNumbers
+      parameters:
+        - $ref: '#/components/parameters/customerIdParam'
+      responses:
+        '200':
+          description: Successful Retrieval of a customer phone numbers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getPhoneNumberListResponse'
+        '400':
+          $ref: '#/components/responses/badRequest'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '404':
+          $ref: '#/components/responses/resourceNotAvailable'
+        '500':
+          $ref: '#/components/responses/internalServerError'
+        '503':
+          $ref: '#/components/responses/serviceUnavailable'
+        '504':
+          $ref: '#/components/responses/gatewayTimeout'
+
+  '/demo/customers/{activationCode}/activate':  
+    get:
+      summary: Activate customer's inactive phone number
+      operationId: activatePhoneNumber
+      parameters:
+        - $ref: '#/components/parameters/activationCodeParam'
+      responses:
+        '200':
+          description: Successful activation of customer's phone number
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerPhoneNumber'
+        '400':
+          $ref: '#/components/responses/badRequest'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '404':
+          $ref: '#/components/responses/resourceNotAvailable'
+        '500':
+          $ref: '#/components/responses/internalServerError'
+        '503':
+          $ref: '#/components/responses/serviceUnavailable'
+        '504':
+          $ref: '#/components/responses/gatewayTimeout'
+        
+    
+components:
+  schemas:
+    getPhoneNumberListResponse:
+      additionalProperties: false
+      type: array
+      items:
+        $ref: "#/components/schemas/CustomerPhoneNumber"
+          
+    CustomerPhoneNumber:  
+      type: object
+      properties:
+        customerId:
+          type: integer
+          format: int64
+        phoneNumber:
+          pattern: '(\(+61\)|\+61|\(0[1-9]\)|0[1-9])?( ?-?[0-9]){6,9}'
+          type: string
+        status:
+          type: string
+          maxLength: 20
+          minLength: 1
+        type:
+          type: string
+          maxLength: 20
+          minLength: 1
+  
+    Error:
+      properties:
+        details:
+          description: Error details
+          type: string
+        errorId:
+          description: Unique identifier for the error
+          type: string
+        message:
+          description: Error summary
+          type: string
+          
+  parameters:
+    customerIdParam:
+      description: Customer ID parameter
+      in: path
+      name: customerId
+      required: true
+      schema:
+        type: integer
+        format: int64
+
+    activationCodeParam:
+      description: Activation parameter
+      in: path
+      name: activationCode
+      required: true
+      schema:
+        type: integer
+        format: int64
+        
+  responses:
+    badRequest:
+      description: BadRequest
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/Error'
+    unauthorized:
+      description: BadRequest
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/Error'
+    forbidden:
+      description: BadRequest
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/Error'
+    resourceNotAvailable:
+      description: BadRequest
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/Error'
+    internalServerError:
+      description: BadRequest
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/Error'
+    serviceUnavailable:
+      description: BadRequest
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/Error'
+    gatewayTimeout:
+      description: BadRequest
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/Error'
+            
+
