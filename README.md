@@ -12,3 +12,8 @@ Run the application DemoApplication.java
 
 # API Docs
 http://localhost:8080/swagger-ui.html
+
+# Test Urls
+get all phone numbers: http://localhost:8080/demo/customers/accounts/phoneNumbers
+get a customer phone numbers: http://localhost:8080/demo/customers/1/phoneNumbers
+activate a phone number: http://localhost:8080/demo/customers/1000/activate

@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -20,11 +21,11 @@ public class ActivationPhoneNumberEntity {
 	}	
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long activationCode;
 	
 	@OneToOne
-    @JoinColumn(name="customer_phone_number_id")
+    @JoinColumn(name = "customer_phone_number_id", referencedColumnName = "id")
 	private CustomerPhoneNumberEntity phoneNumber;
 	
 	@Enumerated(EnumType.STRING)
@@ -34,75 +35,43 @@ public class ActivationPhoneNumberEntity {
 	
 	private LocalDateTime updateDt; 
 		
-	/**
-	 * @return the activationCode
-	 */
 	public Long getActivationCode() {
 		return activationCode;
 	}
 
-	/**
-	 * @param activationCode the activationCode to set
-	 */
-	public void setActivationCode(Long activationCode) {
-		this.activationCode = activationCode;
-	}
-
-	/**
-	 * @return the phoneNumber
-	 */
 	public CustomerPhoneNumberEntity getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	/**
-	 * @param phoneNumber the phoneNumber to set
-	 */
 	public void setPhoneNumber(CustomerPhoneNumberEntity phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
-	/**
-	 * @return the status
-	 */
 	public ActivationStatus getStatus() {
 		return status;
 	}
 
-	/**
-	 * @param status the status to set
-	 */
 	public void setStatus(ActivationStatus status) {
 		this.status = status;
 	}
 
-	/**
-	 * @return the createDt
-	 */
 	public LocalDateTime getCreateDt() {
 		return createDt;
 	}
 
-	/**
-	 * @param createDt the createDt to set
-	 */
 	public void setCreateDt(LocalDateTime createDt) {
 		this.createDt = createDt;
 	}
 
-	/**
-	 * @return the updateDt
-	 */
 	public LocalDateTime getUpdateDt() {
 		return updateDt;
 	}
 
-	/**
-	 * @param updateDt the updateDt to set
-	 */
 	public void setUpdateDt(LocalDateTime updateDt) {
 		this.updateDt = updateDt;
 	}
 
-	
+	public void setActivationCode(Long activationCode) {
+		this.activationCode = activationCode;
+	}	
 }
