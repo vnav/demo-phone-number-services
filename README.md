@@ -2,7 +2,7 @@
 Sample API for customer phone number services
 
 
-# Sample data in 
+# Sample data
 https://github.com/vnav/demo-phone-number-services/blob/main/src/main/resources/data.sql
 
 
@@ -10,10 +10,16 @@ https://github.com/vnav/demo-phone-number-services/blob/main/src/main/resources/
 Run the application DemoApplication.java
 
 
+# OpenAPI specification
+https://github.com/vnav/demo-phone-number-services/blob/main/src/main/resources/customer-phone-number.yml
+
+
 # API Docs
 http://localhost:8080/swagger-ui.html
 
+
 # Test Urls
-get all phone numbers: http://localhost:8080/demo/customers/accounts/phoneNumbers
-get a customer phone numbers: http://localhost:8080/demo/customers/1/phoneNumbers
-activate a phone number: http://localhost:8080/demo/customers/1000/activate
+
+- get all phone numbers: http://localhost:8080/demo/customers/accounts/phoneNumbers
+- get a customer phone numbers: http://localhost:8080/demo/customers/1/phoneNumbers
+- activate a phone number: http://localhost:8080/demo/customers/1000/activate
